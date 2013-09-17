@@ -26,5 +26,6 @@ Gem::Specification.new do |s|
   s.add_dependency("slim")
   s.add_dependency("therubyracer")
   s.add_dependency("coffee-script")
+  s.add_dependency("compass")
   s.add_development_dependency("rake")
 end

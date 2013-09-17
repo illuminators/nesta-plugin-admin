@@ -1,0 +1,123 @@
+@import 'colors.sass'
+@import 'mixins.sass'
+@import 'icons.sass'
+
+@import 'compass/reset'
+@import 'compass'
+
+@include global-reset
+
+@import 'typography.sass'
+@import 'forms.sass'
+
+.hidden
+  display: none
+
+.pull-left
+  float: left
+
+.pull-right
+  float: right
+
+#sidebar
+  width: 250px
+  background: $light-gray
+
+  @include absolute(0, auto, 0, 0)
+
+  em.title
+    display: block
+    font-weight: 600
+    font-size: 2em
+    padding: 1em 15px 0 15px
+    margin-bottom: 1em
+
+  h3
+    font-size: 1.6em
+    font-weight: 600
+    margin: .7em 15px .3em 51px
+    line-height: 1.5
+
+  a.back-to-home
+    padding: 0 15px
+
+  .directory
+    padding-left: 15px
+    li
+      a.item
+        line-height: 1.5
+        padding: 8px 15px 8px 0
+        display: block
+        margin-left: 37px
+
+        &.back
+          position: relative
+          margin-left: 0
+          padding-left: 37px
+
+          & > [class^='icon-']
+            position: absolute
+            left: 0
+            top: 0
+
+      & > [class^='icon-']
+        float: left
+        display: block
+
+      &.current
+        background: $bg
+
+#content
+  overflow: hidden
+  @include absolute(0, 0, 0, 250px)
+
+  & > .row-fluid 
+    height: 100%
+    position: relative
+    .span6
+      width: 50%
+      height: 100%
+      margin: 0
+
+  #editor
+    overflow-y: auto
+    overflow-x: hidden
+    padding: 25px
+
+    h1
+      padding: 0 15px
+      &:first-child
+        margin-top: .01em
+
+    p
+      padding: 0 15px
+
+    .head
+      border-bottom: 1px solid $light-gray
+      padding-bottom: 10px
+
+      .options
+        padding: 0 15px 15px
+
+      .meta, .style
+        .inner-wrapper
+          padding: 15px 0
+          border-top: 1px solid $light-gray
+
+          & > .row-fluid
+            & >
+              div:first-child
+                padding-left: 15px
+              div:last-child
+                padding-right: 15px
+
+
+    .body
+      padding-top: 25px
+
+    .actions
+      margin-top: 25px
+      text-align: right
+
+      a
+        margin-left: 15px

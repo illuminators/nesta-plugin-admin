@@ -1,0 +1,98 @@
+.row-fluid
+
+  .span6#editor
+    .head
+      - if @page.heading
+        .header.editing
+          h1.text
+            = @page.heading
+            a.icon-pencil.edit href='#' title='click to edit heading'
+          input.h1#heading.hidden type='text' name='heading' placeholder='type here heading of this page' value=@page.heading
+      - else
+        .header
+          h1.text.hidden
+            = @page.heading
+            a.icon-pencil.edit href='#' title='click to edit heading'
+          input.h1#heading type='text' name='heading' placeholder='type here heading of this page'
+
+      .options
+        a.show-meta href='#' title='edit metadata' 
+          | metadata
+          .icon-down
+
+        a.show-style href='#' title='edit style' 
+          | style
+          .icon-down
+
+      .meta.hidden
+        .inner-wrapper
+          .control-group
+            label.control-label for='meta_title' title
+            .controls
+              input#meta_title type='text' name='meta[title]' value=@page.metadata('title')
+          .control-group
+            label.control-label for='meta_description' description
+            .controls
+              input#meta_description type='text' name='meta[description]' value=@page.metadata('description')
+
+          .options.form-inline
+            a.add-more-metadata href='#' title='add more metadata' 
+              .icon-plus
+              | add more metadata
+
+            .add-more-template.hidden
+              .control-group.removable.meta
+                label.control-label
+                .controls
+                  input type='text'
+                  a.remove href='#' title='remove'
+                    .icon-cancel
+            .add-more-select.hidden
+              select
+                - @config['allowed_metadata'].each do |m|
+                  option value=m = m
+              a.add href='#' title='add metadata'
+                .icon-ok
+              a.remove href='#' title='cancel'
+                .icon-cancel
+
+            .control-group
+              input#meta_draft type='checkbox' name='meta[draft]' value=@page.draft?
+              label for='meta_draft' draft
+
+      .style.hidden
+        .inner-wrapper
+          .row-fluid
+            .span6.control-group
+              label for='meta_template' template
+              .controls
+                select#meta_template name='meta[template]' selected=@page.metadata('template')
+                  - @config['templates'].each do |k, v|
+                    option value=k = v
+            .span6.control-group
+              label for='meta_layout' layout
+              .controls
+                select#meta_layout name='meta[layout]' selected=@page.metadata('layout')
+                  - @config['layouts'].each do |k, v|
+                    option value=k = v
+
+    .body 
+      textarea#body type='text' name='body' placeholder='there is a place for your content...'
+        - unless @page.body.sub(/\n/, '').empty?
+          = @page.body_markup
+
+      coffee:
+        $(document).ready ->
+          $('#body').autosize()
+
+    .actions
+      a#cancel.btn.big.link href='#' title='discard all changes'
+        | discard changes
+        .icon-cancel
+
+      a#save.btn.big href='#' title='save changes'
+        | save changes
+        .icon-ok
+
+  .span6#preview
+    h2 Preview of this page

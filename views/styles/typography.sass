@@ -1,0 +1,74 @@
+@import 'colors.sass'
+@import 'mixins.sass'
+@import 'compass'
+
+body
+  font-family: 'Open Sans', helvetica, arial, sans-serif
+  font-size: 14px
+  line-height: 1.5
+  color: $base-color
+  background: $bg
+
+h1
+  font-size: 2.5em
+  font-weight: 300
+
+h2
+  font-size: 1.8em
+
+h3
+  font-size: 1.5em
+
+a
+  text-decoration: none
+  color: $base-color
+  opacity: .5
+  @include transition(all 300ms ease)
+
+  &:hover
+    opacity: 1
+
+p
+  margin-top: 1em
+
+.row-fluid
+  width: 100%
+  @include clearfix
+
+  & > [class^='span']
+    display: block
+    float: left
+    width: 100%
+    min-height: 30px
+    margin-left: 2.564102564102564%
+
+    @include box-sizing(border-box)
+
+    &:first-child
+      margin-left: 0
+
+  & >
+    .span1
+      width: 5.982905982905983%
+    .span2
+      width: 14.52991452991453%
+    .span3
+      width: 23.076923076923077%
+    .span4
+      width: 31.623931623931625%
+    .span5
+      width: 40.17094017094017%
+    .span6
+      width: 48.717948717948715%
+    .span7
+      width: 57.26495726495726%
+    .span8
+      width: 65.81196581196582%
+    .span9
+      width: 74.35897435897436%
+    .span10
+      width: 82.90598290598291%
+    .span11
+      width: 91.45299145299145%
+    .span12
+      width: 100%

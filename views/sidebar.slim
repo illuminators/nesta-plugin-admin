@@ -1,0 +1,29 @@
+em.title == @title
+
+a.back-to-home href='/' title='go back to homepage' 
+  .icon-prev
+  | back to homepage
+
+h3 pages
+ul.directory
+  - unless @directory.path == '/'
+    li
+      a.back.item href="/admin/#{@directory.back}index" title='go to parent directory' 
+        .icon-prev
+        | back
+  - @directory.list.each do |item|
+    - request_path = request.path.sub(/^\/admin/, '').sub(/^\//, '')
+    - if item.path == @directory.path.sub(/\/$/, '')
+      - href = item.path + '/index'
+    - elsif item.path.end_with? '/'
+      - href = item.path + 'index'
+    - else
+      - href = item.path
+    - href = href.sub(/^\//, '')
+    li class="#{'current' if request_path == item.path || request_path.sub(/^\//, '') == href}"
+      a.icon-plus href='#' title='add subpage'
+      a.item href="/admin/#{href}"
+        - if item.path == @directory.path.sub(/^\//, '')
+          | index
+        - else
+          = item.heading || item.path.sub(/^.*\//, '')

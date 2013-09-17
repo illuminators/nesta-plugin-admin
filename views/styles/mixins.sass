@@ -1,0 +1,12 @@
+@mixin absolute($t, $r, $b, $l)
+  position: absolute
+  top: $t
+  right: $r
+  bottom: $b
+  left: $l
+
+@mixin clearfix
+  &:after, &:before
+    display: table
+    clear: both
+    content: ''

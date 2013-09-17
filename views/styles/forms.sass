@@ -1,0 +1,76 @@
+@import 'colors.sass'
+@import 'compass'
+
+input[type='text'], textarea, input[type='submit'], .btn
+  background: $light-gray
+  border: 0px
+  padding: 7px 15px
+  width: 100%
+  font-family: 'Open Sans', helvetica, arial, sans-serif
+  line-height: 1.5
+  outline: none
+  color: $dark-gray
+
+  @include box-sizing(border-box)
+
+.btn, input[type='submit']
+  opacity: 1
+  @include transition(all 200ms ease)
+  [class^='icon-']
+    margin-right: -15px
+
+  &:hover
+    background: $gray
+
+  &.big
+    font-size: 1.5em
+    padding: 15px 25px
+    [class^='icon-']
+      margin-right: -10px
+
+  &.link
+    background: none
+
+    &:hover
+      background: $gray
+
+
+textarea
+  resize: vertical
+  padding: 15px
+
+input.h1
+  font-size: 2.5em
+
+.control-group
+  margin-bottom: 5px
+  .control-label
+    display: block
+    padding: 7px 15px 2px
+    cursor: pointer
+    display: block
+    color: $dark-gray
+    clear: both
+    font-weight: 700
+
+  .controls
+    clear: both
+
+.form-horizontal
+  .control-group
+    @include clearfix
+    .control-label
+      float: left
+      width: 150px
+      text-align: right
+      padding: 7px 0
+    .controls
+      margin-left: 180px
+
+      input[type='text']
+        width: auto
+
+.form-inline
+  .control-group
+    display: inline-block
+    margin-left: 1em
