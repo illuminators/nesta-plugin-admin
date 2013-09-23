@@ -24,8 +24,11 @@ Gem::Specification.new do |s|
   s.add_dependency("nesta", ">= 0.9.11")
   s.add_dependency("sinatra-contrib")
   s.add_dependency("slim")
-  s.add_dependency("therubyracer")
   s.add_dependency("coffee-script")
   s.add_dependency("compass")
+  s.add_dependency("sinatra-cache")
+  s.add_dependency("bundler")
   s.add_development_dependency("rake")
+  s.add_development_dependency("pry")
+  s.add_development_dependency("pry-debugger")
 end
