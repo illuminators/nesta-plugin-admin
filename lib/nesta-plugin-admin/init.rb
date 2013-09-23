@@ -13,6 +13,7 @@ require 'compass'
 unless defined?(Nesta::Config)
   puts "Only plugin is loaded - without app!"
   require 'nesta/config'
+  require 'nesta/models'
 end
 
 

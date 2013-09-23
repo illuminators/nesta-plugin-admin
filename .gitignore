@@ -18,3 +18,4 @@ log/
 .yardoc
 _yardoc
 doc/
+.ruby-version
