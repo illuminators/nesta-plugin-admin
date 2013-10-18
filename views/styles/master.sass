@@ -41,14 +41,17 @@
   a.back-to-home
     padding: 0 15px
 
-  .directory
+  .list
     padding-left: 15px
     li
-      a.item
+      .item
         line-height: 1.5
         padding: 8px 15px 8px 0
         display: block
         margin-left: 37px
+
+        &.no-icon
+          margin-left: 0
 
         &.back
           position: relative
@@ -67,6 +70,64 @@
       &.current
         background: $bg
 
+    &.directory
+      padding-bottom: 15px
+
+    &.options
+      @include absolute(auto, 0, 0, 0)
+      background: $light-gray
+      padding: 10px 0 20px 15px
+      border-top: 1px solid $gray
+      li
+        a
+          [class^='icon-']
+            float: left
+
+          & > div
+            opacity: .5
+            @include transition(opacity 300ms ease)
+
+          &:hover > div
+            opacity: 1
+
+  #add_page
+    padding: 0 15px
+    line-height: 37px
+    display: block
+    background: $light-gray
+    border-top: 1px dashed $lighter-gray
+    @include absolute(auto, 0px, 68px, 0px)
+    margin: 0
+    opacity: 1
+
+    & > div
+      opacity: .5
+      @include transition(opacity 300ms ease)
+
+    & > [class^='icon-']
+      float: left
+    & > .text
+      margin-left: 37px
+    
+    &:hover > div
+      opacity: 1
+
+  .directories-wrapper
+    overflow: hidden
+    @include absolute(185px, 0, 105px, 0)
+
+    .inner-wrapper
+      position: relative
+      height: 100%
+
+    .directory-wrapper
+      position: relative
+      width: 250px
+      height: 100%
+      overflow-x: hidden
+      overflow-y: auto
+      float: left
+
 #content
   overflow: hidden
   @include absolute(0, 0, 0, 250px)
@@ -80,20 +141,29 @@
       margin: 0
 
   #editor
+    position: relative
     overflow-y: auto
     overflow-x: hidden
     padding: 25px
 
-    h1
-      padding: 0 15px
-      &:first-child
-        margin-top: .01em
+    .header
+      @include clearfix
+
+      h1
+        padding: 0 15px
+        float: left
+
+      .edit
+        margin-top: 10px
 
     p
       padding: 0 15px
 
     .head
+      position: relative
+      z-index: 2
       border-bottom: 1px solid $light-gray
+      background: $bg
       padding-bottom: 10px
 
       .options
@@ -111,13 +181,44 @@
               div:last-child
                 padding-right: 15px
 
-
     .body
-      padding-top: 25px
+      z-index: 1
+      overflow: hidden
+      @include absolute(176px, 25px, 95px, 25px)
+
+      textarea
+        height: 100%
+        overflow-x: hidden
+        overflow-y: auto
+        resize: none
 
     .actions
-      margin-top: 25px
+      padding: 25px
+      @include absolute(auto, 0, 0, 0)
       text-align: right
 
       a
-        margin-left: 15px
+        display: block
+        width: auto
+
+.loader
+  background: $light-gray url('/admin/images/loader.gif') no-repeat center center
+  border-left: 1px solid $bg
+  z-index: 9999
+  opacity: .8
+  @include absolute(0, 0, 0, 0)
+  @include box-sizing(border-box)
+
+#preview
+  position: relative
+
+  iframe
+    height: 100%
+    width: 100%
+
+  .loading
+    opacity: 1
+
+  .plastic
+    z-index: 2
+    @include absolute(0, 0, 0, 0)

@@ -9,6 +9,7 @@ require 'coffee-script'
 require 'slim'
 require 'sass'
 require 'compass'
+require 'json'
 
 unless defined?(Nesta::Config)
   puts "Only plugin is loaded - without app!"

@@ -22,6 +22,21 @@ module Nesta::Plugin::Admin
         result << "</ul>"
       end
 
+      def render_dir_tree(dir, hidden=false)
+        result = slim(:'sidebar/_directory', layout: false, locals: {dir: dir, hidden: hidden})
+        dir.directories.each { |dir| \
+          result << render_dir_tree(dir, true) }
+
+        result
+      end
+
+      def dirs_count(dir)
+        count = 1
+        dir.directories.each { |d| count += 1 }
+
+        count
+      end
+
       private
 
       def __item_current?(href)
@@ -35,4 +50,7 @@ module Nesta::Plugin::Admin
   end
 end
 
+Nesta::Plugin::Admin::App.helpers Nesta::Overrides::Renderers
+Nesta::Plugin::Admin::App.helpers Nesta::Navigation::Renderers
+Nesta::Plugin::Admin::App.helpers Nesta::View::Helpers
 Nesta::Plugin::Admin::App.helpers Nesta::Plugin::Admin::Helpers::App

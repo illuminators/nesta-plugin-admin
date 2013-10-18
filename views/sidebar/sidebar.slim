@@ -1,0 +1,20 @@
+em.title == @title
+
+a.back-to-home href='/' title='go back to homepage' 
+  .icon-prev
+  | back to homepage
+
+h3 pages
+.directories-wrapper
+  - count = dirs_count(@directory)
+  .inner-wrapper style="width: #{count * 250}px"
+    == render_dir_tree(@directory)
+a#add_page.fixed href='#' title='add page'
+  .icon-plus
+  .text add page
+
+ul.options.list
+  li
+    a#settings href='#' title='settings'
+      .icon-plus
+      .item settings

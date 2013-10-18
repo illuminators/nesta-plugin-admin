@@ -17,6 +17,15 @@ module Nesta
             cache sass(("styles/" + params[:sheet]).to_sym, Compass.sass_engine_options)
           end
 
+          get '/layout/:layout/:template' do
+            set_common_variables
+            @page = Nesta::Page.find_by_path(params[:page])
+            raise Sinatra::NotFound if @page.nil?
+            @title = @page.title
+            set_from_page(:description, :keywords)
+            cache haml(:"#{params[:template]}", layout: :"#{params[:layout]}", views: Nesta::App.views)
+          end
+
           # --- main routes
           get '*' do
             #begin
@@ -24,10 +33,27 @@ module Nesta
               dir_path = slug.end_with?('/') ? \
                 slug : slug.sub(/[\/]?[^\/]*$/, '')
 
-              @directory = Directory.new(dir_path)
               @page = Nesta::Page.find_by_path(params[:splat][0])
 
-              slim :page
+              if request.xhr?
+                {
+                  heading: @page.heading,
+                  meta: {
+                    title: @page.metadata('title'),
+                    description: @page.metadata('description'),
+                    tags: @page.metadata('tags'), },
+                  style: {
+                    layout: @page.layout,
+                    template: @page.template, },
+                  draft: @page.draft?,
+                  hidden: @page.hidden?,
+                  body_markup: @page.body_markup,
+                }.to_json
+              else
+                @directory = Directory.new(dir_path)
+
+                slim :page
+              end
             #rescue NameError
             #  raise Sinatra::NotFound
             #end

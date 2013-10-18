@@ -4,16 +4,18 @@
     .head
       - if @page.heading
         .header.editing
-          h1.text
-            = @page.heading
+          .text
+            h1 = @page.heading
             a.icon-pencil.edit href='#' title='click to edit heading'
-          input.h1#heading.hidden type='text' name='heading' placeholder='type here heading of this page' value=@page.heading
+          .input.hidden
+            input.h1#heading type='text' name='heading' placeholder='type here heading of this page' value=@page.heading
       - else
         .header
-          h1.text.hidden
-            = @page.heading
+          .text.hidden
+            h1.heading = @page.heading
             a.icon-pencil.edit href='#' title='click to edit heading'
-          input.h1#heading type='text' name='heading' placeholder='type here heading of this page'
+          .input
+            input.h1#heading type='text' name='heading' placeholder='type here heading of this page'
 
       .options
         a.show-meta href='#' title='edit metadata' 
@@ -41,7 +43,7 @@
               | add more metadata
 
             .add-more-template.hidden
-              .control-group.removable.meta
+              .control-group.removable
                 label.control-label
                 .controls
                   input type='text'
@@ -76,23 +78,23 @@
                   - @config['layouts'].each do |k, v|
                     option value=k = v
 
-    .body 
+    .body
       textarea#body type='text' name='body' placeholder='there is a place for your content...'
         - unless @page.body.sub(/\n/, '').empty?
           = @page.body_markup
 
-      coffee:
-        $(document).ready ->
-          $('#body').autosize()
-
     .actions
-      a#cancel.btn.big.link href='#' title='discard all changes'
+      a#cancel.btn.big.link.pull-left href='#' title='discard all changes'
         | discard changes
         .icon-cancel
 
-      a#save.btn.big href='#' title='save changes'
+      a#save.btn.big.pull-right href='#' title='save changes'
         | save changes
         .icon-ok
 
+    .loader.hidden
+
   .span6#preview
-    h2 Preview of this page
+    iframe src="/#{@page.path}" name='preview'
+    .plastic
+    .loader

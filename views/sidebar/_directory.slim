@@ -1,0 +1,26 @@
+.directory-wrapper class="#{'hidden' if hidden}"
+  ul.directory.list data-path=dir.path
+    - unless dir.path == '/'
+      li
+        a.back.item href="/admin/#{dir.back}index" title='go to parent directory' 
+          .icon-prev
+          | back
+    - p "directory: #{dir.path}"
+    - dir.list.each do |item|
+      - request_path = request.path.sub(/^\/admin/, '').sub(/^\//, '')
+      - if item.path == dir.path.sub(/\/$/, '')
+        - href = item.path + '/index'
+      - elsif item.path.end_with? '/'
+        - href = item.path + 'index'
+      - else
+        - href = item.path
+      - href = href.sub(/^\//, '')
+      li class="#{'current' if request_path == item.path || request_path.sub(/^\//, '') == href}"
+        - unless item.is_a? Nesta::Plugin::Admin::Directory or item.path == dir.path.sub(/\/$/, '')
+          a.icon-plus href='#' title='add subpage'
+        a.item href="/admin/#{href}"
+          - p "page: #{item.path}"
+          - if item.path == dir.path.sub(/\/$/, '')
+            | index
+          - else
+            = item.heading || item.path.sub(/^.*\//, '')

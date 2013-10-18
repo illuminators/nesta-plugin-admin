@@ -18,21 +18,24 @@ input[type='text'], textarea, input[type='submit'], .btn
   @include transition(all 200ms ease)
   [class^='icon-']
     margin-right: -15px
+    margin-top: -12px
 
   &:hover
-    background: $gray
+    background: $lighter-gray
 
   &.big
-    font-size: 1.5em
-    padding: 15px 25px
+    font-size: 1.2em
+    padding: 10px 20px
     [class^='icon-']
       margin-right: -10px
 
   &.link
     background: none
+    opacity: .5
 
     &:hover
-      background: $gray
+      background: $lighter-gray
+      opacity: 1
 
 
 textarea
@@ -41,6 +44,7 @@ textarea
 
 input.h1
   font-size: 2.5em
+  font-weight: 200
 
 .control-group
   margin-bottom: 5px
@@ -55,6 +59,13 @@ input.h1
 
   .controls
     clear: both
+
+  &.removable .remove
+    margin-left: -37px
+    height: 33px
+
+    [class^='icon-']
+      margin-bottom: -14px
 
 .form-horizontal
   .control-group

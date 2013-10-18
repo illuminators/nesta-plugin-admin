@@ -7,6 +7,7 @@ module Nesta
 
         def initialize(path)
           @path = path.sub(/^\//, '')
+          @path += '/' unless @path.match(/\/$/)
           path = File.join(Nesta::App.root, Nesta::Config.page_path, path)
           raise NameError, 'Directory not found' \
             unless File.exists?(path) and File.directory?(path)
@@ -22,7 +23,7 @@ module Nesta
         end
 
         def back
-          @path.empty? ? nil : @path.sub(/[\/]?[^\/]*$/, '')
+          @path.empty? ? nil : @path.sub(/[\/]?[^\/]*\/$/, '')
         end
 
         private
